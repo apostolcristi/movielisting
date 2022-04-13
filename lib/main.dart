@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
         await get(Uri.parse('https://yts.torrentbay.to/api/v2/list_movies.json?quality=3D&page=$_pageNumber'));
 
     final Map<String, dynamic> result = jsonDecode(response.body) as Map<String, dynamic>;
-    final Map<String,dynamic> movieList=result['data'] as Map<String, dynamic>;
+    final Map<String, dynamic> movieList = result['data'] as Map<String, dynamic>;
     final List<dynamic> movies = movieList['movies'] as List<dynamic>;
 
     final List<Movie> data = <Movie>[];
