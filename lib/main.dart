@@ -68,9 +68,8 @@ class _HomePageState extends State<HomePage> {
         await get(Uri.parse('https://yts.torrentbay.to/api/v2/list_movies.json?quality=3D&page=$_pageNumber'));
 
     final Map<String, dynamic> result = jsonDecode(response.body) as Map<String, dynamic>;
-    //I don't understand how to solve it???
-    // ignore: avoid_dynamic_calls
-    final List<dynamic> movies = result['data']['movies'] as List<dynamic>;
+    final Map<String,dynamic> movieList=result['data'] as Map<String, dynamic>;
+    final List<dynamic> movies = movieList['movies'] as List<dynamic>;
 
     final List<Movie> data = <Movie>[];
     for (int i = 0; i < movies.length; i++) {
