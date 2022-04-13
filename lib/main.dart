@@ -48,7 +48,7 @@ class Movie {
 
   @override
   String toString() {
-    return "MovieTitle: $title, year: $year, rating: $rating, genres:$genres, poster:$poster";
+    return 'MovieTitle: $title, year: $year, rating: $rating, genres:$genres, poster:$poster';
   }
 }
 
@@ -68,6 +68,8 @@ class _HomePageState extends State<HomePage> {
         await get(Uri.parse('https://yts.torrentbay.to/api/v2/list_movies.json?quality=3D&page=$_pageNumber'));
 
     final Map<String, dynamic> result = jsonDecode(response.body) as Map<String, dynamic>;
+    //I don't understand how to solve it???
+    // ignore: avoid_dynamic_calls
     final List<dynamic> movies = result['data']['movies'] as List<dynamic>;
 
     final List<Movie> data = <Movie>[];
@@ -84,18 +86,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Movies"),
-          actions: <Widget>[
-            IconButton(
-                onPressed: () {
-                  _pageNumber++;
-                  _getMovies();
-                },
-                icon: const Icon(Icons.add))
-          ],
-        ),
-        body: Builder(builder: (BuildContext context) {
+      appBar: AppBar(
+        title: const Text('Movies'),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              _pageNumber++;
+              _getMovies();
+            },
+            icon: const Icon(Icons.add),
+          )
+        ],
+      ),
+      body: Builder(
+        builder: (BuildContext context) {
           if (_isLoading && _movies.isEmpty) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -110,13 +114,15 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Image.network(movie.poster),
                   Text(movie.title),
-                  Text("${movie.year}"),
-                  Text(movie.genres.join(", ")),
-                  Text("${movie.rating}"),
+                  Text('${movie.year}'),
+                  Text(movie.genres.join(', ')),
+                  Text('${movie.rating}'),
                 ],
               );
             },
           );
-        }));
+        },
+      ),
+    );
   }
 }
