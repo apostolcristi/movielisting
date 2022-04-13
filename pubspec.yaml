@@ -1,0 +1,21 @@
+name: basic_phrases
+description: A simple application that contains a list with audio(from our language and foreign language
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+dependencies:
+  http: ^0.13.4
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^2.4.0
